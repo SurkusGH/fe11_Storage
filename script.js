@@ -21,6 +21,46 @@ function funcValue(){
     h2.innerHTML = input.value;
 }
 
-submit.addEventListener('click', () => {
-    sessionStorage.setItem('LocalStorage', input.value)
+let isSaved = false;
+
+document.addEventListener('DOMContentLoaded', ()=> {
+    console.log(localStorage.getItem('LocalStorage'))
+    const result = localStorage.getItem('LocalStorage')
+
+    if(result){
+        isSaved = true;
+        console.log(`saved! value of "${result}"`)
+    } else{
+        console.log('not saved!')
+    }
 })
+
+
+submit.addEventListener('click', () => {
+    if(!isSaved){
+    localStorage.setItem('LocalStorage', input.value)
+    }
+    console.log('saved!')
+})
+
+// session storage nusi'reset'ina naršyklei išjsijungus
+
+//Confirm asignment
+
+const reloading = true;
+if(localStorage.getItem('consent') == 'accepted'){
+    reloading = false
+}else{
+    const confirmation = confirm("Agree to terms and conditions!\nEither OK or Cancel.")
+    if(confirmation){
+        localStorage.setItem('consent', 'accepted')
+    }
+    refresh();
+}
+function refresh() {    
+    setTimeout(function () {
+        location.reload()
+    }, 1000);
+}
+
+JSON.stringify( )
